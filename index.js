@@ -1,14 +1,3 @@
-const selectionSort = (arr) => {
-  for (let i = 0; i < arr.length; i++) {
-    let minIndex = i;
-    for (let j = i + 1; j < arr.length; j++) {
-      if (arr[j] < arr[minIndex]) {
-        minIndex = j;
-      }
-    }
-    if (minIndex !== i) {
-      [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]];
-    }
-  }
-  return arr;
-};
+function findNumbers(nums) {
+  return nums.filter((num) => num.toString().length % 2 === 0).length;
+}

@@ -1,3 +1,4 @@
-function findNumbers(nums) {
-  return nums.filter((num) => num.toString().length % 2 === 0).length;
-}
+const factorial = (num) => {
+  if (num === 0) return 1;
+  return num * factorial(num - 1);
+};

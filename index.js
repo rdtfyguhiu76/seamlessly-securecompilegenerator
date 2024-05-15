@@ -1,26 +1,33 @@
-function letterCombinations(digits) {
-  if (digits.length === 0) return [];
-  const map = {
-    2: "abc",
-    3: "def",
-    4: "ghi",
-    5: "jkl",
-    6: "mno",
-    7: "pqrs",
-    8: "tuv",
-    9: "wxyz",
-  };
+function solveNQueens(n) {
   const result = [];
-  backtrack("", digits);
+  const board = Array.from({ length: n }, () =>
+    Array.from({ length: n }, () => "."),
+  );
+  backtrack(0);
   return result;
-  function backtrack(combination, nextDigits) {
-    if (nextDigits.length === 0) result.push(combination);
-    else {
-      const digit = nextDigits.substring(0, 1);
-      const letters = map[digit];
-      for (const letter of letters) {
-        backtrack(combination + letter, nextDigits.substring(1));
+  function backtrack(row) {
+    if (row === n) {
+      result.push(board.map((row) => row.join("")));
+      return;
+    }
+    for (let col = 0; col < n; col++) {
+      if (isValid(row, col)) {
+        board[row][col] = "Q";
+        backtrack(row + 1);
+        board[row][col] = ".";
       }
     }
+  }
+  function isValid(row, col) {
+    for (let i = 0; i < row; i++) {
+      if (board[i][col] === "Q") return false;
+    }
+    for (let i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--) {
+      if (board[i][j] === "Q") return false;
+    }
+    for (let i = row - 1, j = col + 1; i >= 0 && j < n; i--, j++) {
+      if (board[i][j] === "Q") return false;
+    }
+    return true;
   }
 }
